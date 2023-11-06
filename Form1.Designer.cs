@@ -28,22 +28,28 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
         tabControl1 = new TabControl();
         tabPage1 = new TabPage();
+        panel3 = new Panel();
+        panel4 = new Panel();
         btnKayitSil = new Button();
         btnGoUpdate = new Button();
         lblAd = new Label();
-        label2 = new Label();
         flowLayoutPanel1 = new FlowLayoutPanel();
+        panel1 = new Panel();
+        panel7 = new Panel();
+        panel5 = new Panel();
+        textBox1 = new TextBox();
+        panel2 = new Panel();
         dataGridView1 = new DataGridView();
         Id = new DataGridViewTextBoxColumn();
-        nameColumn = new DataGridViewButtonColumn();
-        textBox1 = new TextBox();
-        label1 = new Label();
+        nameColumn = new DataGridViewTextBoxColumn();
         tabPage2 = new TabPage();
+        panel6 = new Panel();
+        flowLayoutPanel2 = new FlowLayoutPanel();
         btnNoUpdate = new Button();
         txtKulId = new TextBox();
-        flowLayoutPanel2 = new FlowLayoutPanel();
         btnEkle = new Button();
         btnResimSec = new Button();
         txtAdSoyad = new TextBox();
@@ -51,233 +57,240 @@ partial class Form1
         openFileDialog1 = new OpenFileDialog();
         tabControl1.SuspendLayout();
         tabPage1.SuspendLayout();
+        panel3.SuspendLayout();
+        panel4.SuspendLayout();
+        panel1.SuspendLayout();
+        panel5.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
         tabPage2.SuspendLayout();
+        panel6.SuspendLayout();
         SuspendLayout();
         // 
         // tabControl1
         // 
+        resources.ApplyResources(tabControl1, "tabControl1");
         tabControl1.Controls.Add(tabPage1);
         tabControl1.Controls.Add(tabPage2);
-        tabControl1.Location = new Point(4, 3);
+        tabControl1.Multiline = true;
         tabControl1.Name = "tabControl1";
         tabControl1.SelectedIndex = 0;
-        tabControl1.Size = new Size(1245, 677);
-        tabControl1.TabIndex = 0;
         // 
         // tabPage1
         // 
-        tabPage1.Controls.Add(btnKayitSil);
-        tabPage1.Controls.Add(btnGoUpdate);
-        tabPage1.Controls.Add(lblAd);
-        tabPage1.Controls.Add(label2);
-        tabPage1.Controls.Add(flowLayoutPanel1);
-        tabPage1.Controls.Add(dataGridView1);
-        tabPage1.Controls.Add(textBox1);
-        tabPage1.Controls.Add(label1);
-        tabPage1.Location = new Point(4, 29);
+        resources.ApplyResources(tabPage1, "tabPage1");
+        tabPage1.Controls.Add(panel3);
+        tabPage1.Controls.Add(panel1);
         tabPage1.Name = "tabPage1";
-        tabPage1.Padding = new Padding(3);
-        tabPage1.Size = new Size(1237, 644);
-        tabPage1.TabIndex = 0;
-        tabPage1.Text = "Ara";
         tabPage1.UseVisualStyleBackColor = true;
+        tabPage1.Click += tabPage1_Click;
+        // 
+        // panel3
+        // 
+        resources.ApplyResources(panel3, "panel3");
+        panel3.Controls.Add(panel4);
+        panel3.Controls.Add(flowLayoutPanel1);
+        panel3.Name = "panel3";
+        // 
+        // panel4
+        // 
+        resources.ApplyResources(panel4, "panel4");
+        panel4.BackColor = Color.WhiteSmoke;
+        panel4.Controls.Add(btnKayitSil);
+        panel4.Controls.Add(btnGoUpdate);
+        panel4.Controls.Add(lblAd);
+        panel4.Name = "panel4";
+        panel4.Paint += panel4_Paint;
         // 
         // btnKayitSil
         // 
-        btnKayitSil.Enabled = false;
-        btnKayitSil.Location = new Point(1106, 28);
+        resources.ApplyResources(btnKayitSil, "btnKayitSil");
         btnKayitSil.Name = "btnKayitSil";
-        btnKayitSil.Size = new Size(94, 29);
-        btnKayitSil.TabIndex = 6;
         btnKayitSil.Tag = "0";
-        btnKayitSil.Text = "Sil";
         btnKayitSil.UseVisualStyleBackColor = true;
         btnKayitSil.Click += btnKayitSil_Click;
         // 
         // btnGoUpdate
         // 
-        btnGoUpdate.Enabled = false;
-        btnGoUpdate.Location = new Point(989, 28);
+        resources.ApplyResources(btnGoUpdate, "btnGoUpdate");
         btnGoUpdate.Name = "btnGoUpdate";
-        btnGoUpdate.Size = new Size(94, 29);
-        btnGoUpdate.TabIndex = 0;
         btnGoUpdate.Tag = "0";
-        btnGoUpdate.Text = "Güncelle";
         btnGoUpdate.UseVisualStyleBackColor = true;
         btnGoUpdate.Click += btnGoUpdate_Click;
         // 
         // lblAd
         // 
-        lblAd.AutoSize = true;
-        lblAd.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-        lblAd.Location = new Point(547, 22);
+        resources.ApplyResources(lblAd, "lblAd");
         lblAd.Name = "lblAd";
-        lblAd.Size = new Size(70, 35);
-        lblAd.TabIndex = 5;
-        lblAd.Text = "...........";
-        // 
-        // label2
-        // 
-        label2.AutoSize = true;
-        label2.Location = new Point(445, 26);
-        label2.Name = "label2";
-        label2.Size = new Size(75, 20);
-        label2.TabIndex = 4;
-        label2.Text = "Ad-Soyad";
         // 
         // flowLayoutPanel1
         // 
-        flowLayoutPanel1.Location = new Point(417, 106);
+        resources.ApplyResources(flowLayoutPanel1, "flowLayoutPanel1");
+        flowLayoutPanel1.BackColor = Color.Transparent;
         flowLayoutPanel1.Name = "flowLayoutPanel1";
-        flowLayoutPanel1.Size = new Size(800, 513);
-        flowLayoutPanel1.TabIndex = 3;
         // 
-        // dataGridView1
+        // panel1
         // 
-        dataGridView1.AllowUserToAddRows = false;
-        dataGridView1.AllowUserToDeleteRows = false;
-        dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, nameColumn });
-        dataGridView1.Location = new Point(31, 106);
-        dataGridView1.Name = "dataGridView1";
-        dataGridView1.ReadOnly = true;
-        dataGridView1.RowHeadersWidth = 51;
-        dataGridView1.RowTemplate.Height = 29;
-        dataGridView1.Size = new Size(300, 490);
-        dataGridView1.TabIndex = 2;
-        dataGridView1.CellClick += dataGridView1_CellClick;
+        resources.ApplyResources(panel1, "panel1");
+        panel1.Controls.Add(panel7);
+        panel1.Controls.Add(panel5);
+        panel1.Controls.Add(panel2);
+        panel1.Controls.Add(dataGridView1);
+        panel1.Name = "panel1";
         // 
-        // Id
+        // panel7
         // 
-        Id.HeaderText = "id";
-        Id.MinimumWidth = 6;
-        Id.Name = "Id";
-        Id.ReadOnly = true;
-        Id.Width = 125;
+        resources.ApplyResources(panel7, "panel7");
+        panel7.Name = "panel7";
         // 
-        // nameColumn
+        // panel5
         // 
-        nameColumn.HeaderText = "Ad-Soyad";
-        nameColumn.MinimumWidth = 6;
-        nameColumn.Name = "nameColumn";
-        nameColumn.ReadOnly = true;
-        nameColumn.Width = 125;
+        resources.ApplyResources(panel5, "panel5");
+        panel5.Controls.Add(textBox1);
+        panel5.Name = "panel5";
+        panel5.Paint += panel5_Paint;
         // 
         // textBox1
         // 
-        textBox1.Location = new Point(54, 22);
+        resources.ApplyResources(textBox1, "textBox1");
+        textBox1.BackColor = SystemColors.ControlLight;
         textBox1.Name = "textBox1";
-        textBox1.Size = new Size(125, 27);
-        textBox1.TabIndex = 1;
         textBox1.TextChanged += textBox1_TextChanged;
         // 
-        // label1
+        // panel2
         // 
-        label1.AutoSize = true;
-        label1.Location = new Point(16, 25);
-        label1.Name = "label1";
-        label1.Size = new Size(32, 20);
-        label1.TabIndex = 0;
-        label1.Text = "Ara";
+        resources.ApplyResources(panel2, "panel2");
+        panel2.BackColor = Color.WhiteSmoke;
+        panel2.Name = "panel2";
+        // 
+        // dataGridView1
+        // 
+        resources.ApplyResources(dataGridView1, "dataGridView1");
+        dataGridView1.AllowUserToAddRows = false;
+        dataGridView1.AllowUserToDeleteRows = false;
+        dataGridView1.AllowUserToResizeColumns = false;
+        dataGridView1.AllowUserToResizeRows = false;
+        dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dataGridView1.BackgroundColor = Color.WhiteSmoke;
+        dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, nameColumn });
+        dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
+        dataGridView1.GridColor = Color.DarkGray;
+        dataGridView1.MultiSelect = false;
+        dataGridView1.Name = "dataGridView1";
+        dataGridView1.ReadOnly = true;
+        dataGridView1.RowHeadersVisible = false;
+        dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+        dataGridView1.RowTemplate.Height = 29;
+        dataGridView1.ShowCellToolTips = false;
+        dataGridView1.ShowEditingIcon = false;
+        dataGridView1.CellClick += dataGridView1_CellClick;
+        dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+        // 
+        // Id
+        // 
+        Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+        Id.FillWeight = 51.3369F;
+        resources.ApplyResources(Id, "Id");
+        Id.Name = "Id";
+        Id.ReadOnly = true;
+        Id.Resizable = DataGridViewTriState.False;
+        // 
+        // nameColumn
+        // 
+        nameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        nameColumn.FillWeight = 108.6631F;
+        resources.ApplyResources(nameColumn, "nameColumn");
+        nameColumn.Name = "nameColumn";
+        nameColumn.ReadOnly = true;
+        nameColumn.Resizable = DataGridViewTriState.True;
+        nameColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // tabPage2
         // 
+        resources.ApplyResources(tabPage2, "tabPage2");
+        tabPage2.BackColor = Color.WhiteSmoke;
+        tabPage2.Controls.Add(panel6);
         tabPage2.Controls.Add(btnNoUpdate);
         tabPage2.Controls.Add(txtKulId);
-        tabPage2.Controls.Add(flowLayoutPanel2);
         tabPage2.Controls.Add(btnEkle);
         tabPage2.Controls.Add(btnResimSec);
         tabPage2.Controls.Add(txtAdSoyad);
         tabPage2.Controls.Add(label4);
-        tabPage2.Location = new Point(4, 29);
         tabPage2.Name = "tabPage2";
-        tabPage2.Padding = new Padding(3);
-        tabPage2.Size = new Size(1237, 644);
-        tabPage2.TabIndex = 1;
-        tabPage2.Text = "Ekle";
-        tabPage2.UseVisualStyleBackColor = true;
+        // 
+        // panel6
+        // 
+        resources.ApplyResources(panel6, "panel6");
+        panel6.Controls.Add(flowLayoutPanel2);
+        panel6.Name = "panel6";
+        // 
+        // flowLayoutPanel2
+        // 
+        resources.ApplyResources(flowLayoutPanel2, "flowLayoutPanel2");
+        flowLayoutPanel2.BackColor = Color.Transparent;
+        flowLayoutPanel2.Name = "flowLayoutPanel2";
         // 
         // btnNoUpdate
         // 
-        btnNoUpdate.Location = new Point(140, 72);
+        resources.ApplyResources(btnNoUpdate, "btnNoUpdate");
         btnNoUpdate.Name = "btnNoUpdate";
-        btnNoUpdate.Size = new Size(94, 29);
-        btnNoUpdate.TabIndex = 6;
-        btnNoUpdate.Text = "İptal";
         btnNoUpdate.UseVisualStyleBackColor = true;
-        btnNoUpdate.Visible = false;
         btnNoUpdate.Click += btnNoUpdate_Click;
         // 
         // txtKulId
         // 
-        txtKulId.Location = new Point(275, 19);
+        resources.ApplyResources(txtKulId, "txtKulId");
         txtKulId.Name = "txtKulId";
-        txtKulId.Size = new Size(52, 27);
-        txtKulId.TabIndex = 5;
-        // 
-        // flowLayoutPanel2
-        // 
-        flowLayoutPanel2.Location = new Point(422, 72);
-        flowLayoutPanel2.Name = "flowLayoutPanel2";
-        flowLayoutPanel2.Size = new Size(761, 540);
-        flowLayoutPanel2.TabIndex = 4;
         // 
         // btnEkle
         // 
-        btnEkle.Location = new Point(21, 72);
+        resources.ApplyResources(btnEkle, "btnEkle");
         btnEkle.Name = "btnEkle";
-        btnEkle.Size = new Size(94, 29);
-        btnEkle.TabIndex = 3;
-        btnEkle.Text = "Ekle";
         btnEkle.UseVisualStyleBackColor = true;
         btnEkle.Click += btnEkle_Click;
         // 
         // btnResimSec
         // 
-        btnResimSec.Location = new Point(422, 22);
+        resources.ApplyResources(btnResimSec, "btnResimSec");
         btnResimSec.Name = "btnResimSec";
-        btnResimSec.Size = new Size(94, 29);
-        btnResimSec.TabIndex = 2;
-        btnResimSec.Text = "Resim Seç";
         btnResimSec.UseVisualStyleBackColor = true;
         btnResimSec.Click += btnResimSec_Click;
         // 
         // txtAdSoyad
         // 
-        txtAdSoyad.Location = new Point(102, 23);
+        resources.ApplyResources(txtAdSoyad, "txtAdSoyad");
         txtAdSoyad.Name = "txtAdSoyad";
-        txtAdSoyad.Size = new Size(155, 27);
-        txtAdSoyad.TabIndex = 1;
         // 
         // label4
         // 
-        label4.AutoSize = true;
-        label4.Location = new Point(21, 26);
+        resources.ApplyResources(label4, "label4");
         label4.Name = "label4";
-        label4.Size = new Size(75, 20);
-        label4.TabIndex = 0;
-        label4.Text = "Ad-Soyad";
         // 
         // openFileDialog1
         // 
         openFileDialog1.FileName = "openFileDialog1";
+        resources.ApplyResources(openFileDialog1, "openFileDialog1");
         // 
         // Form1
         // 
-        AutoScaleDimensions = new SizeF(8F, 20F);
+        resources.ApplyResources(this, "$this");
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1261, 692);
         Controls.Add(tabControl1);
         Name = "Form1";
-        Text = "Form1";
+        WindowState = FormWindowState.Maximized;
         Load += Form1_Load;
         tabControl1.ResumeLayout(false);
         tabPage1.ResumeLayout(false);
-        tabPage1.PerformLayout();
+        panel3.ResumeLayout(false);
+        panel4.ResumeLayout(false);
+        panel4.PerformLayout();
+        panel1.ResumeLayout(false);
+        panel5.ResumeLayout(false);
+        panel5.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
         tabPage2.ResumeLayout(false);
         tabPage2.PerformLayout();
+        panel6.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -286,14 +299,10 @@ partial class Form1
     private TabControl tabControl1;
     private TabPage tabPage1;
     private TextBox textBox1;
-    private Label label1;
     private TabPage tabPage2;
     private Label lblAd;
-    private Label label2;
     private FlowLayoutPanel flowLayoutPanel1;
     private DataGridView dataGridView1;
-    private DataGridViewTextBoxColumn Id;
-    private DataGridViewButtonColumn nameColumn;
     private Button btnEkle;
     private Button btnResimSec;
     private TextBox txtAdSoyad;
@@ -304,4 +313,13 @@ partial class Form1
     private TextBox txtKulId;
     private Button btnNoUpdate;
     private Button btnKayitSil;
+    private Panel panel1;
+    private Panel panel2;
+    private Panel panel3;
+    private Panel panel4;
+    private Panel panel5;
+    private Panel panel6;
+    private DataGridViewTextBoxColumn Id;
+    private DataGridViewTextBoxColumn nameColumn;
+    private Panel panel7;
 }

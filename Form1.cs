@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Windows.Forms;
+using System.Linq;
 using yeni.Models;
 
 namespace yeni;
@@ -8,6 +10,8 @@ public partial class Form1 : Form
 {
     private readonly CustomerDbContext _context;
     private readonly string imagesFilePath = $"{Application.StartupPath}\\images\\";
+    List<long> DeleteImages = new List<long>();
+    CultureInfo culture = new CultureInfo("tr-TR");
     public Form1()
     {
         _context = new CustomerDbContext();
@@ -30,39 +34,40 @@ public partial class Form1 : Form
         }
         if (string.IsNullOrEmpty(txtKulId.Text))
         {
-            DialogResult msg=MessageBox.Show("Kayýt Eklensin mi? ","Onayla",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if (msg != DialogResult.Yes) { 
-            try
+            DialogResult msg = MessageBox.Show("Kayýt Eklensin mi? ", "Onayla", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (msg == DialogResult.Yes)
             {
-                Musteri musteri = new Musteri();
-                musteri.AdSoyad = txtAdSoyad.Text;
-                _context.Musteris.Add(musteri);
-                await _context.SaveChangesAsync();
-                MusteriListele();
-                if (flowLayoutPanel2.Controls.Count != 0)
+                try
                 {
-                    int sayac = 1;
-                    foreach (Control c in flowLayoutPanel2.Controls)
+                    Musteri musteri = new Musteri();
+                    musteri.AdSoyad = txtAdSoyad.Text;
+                    _context.Musteris.Add(musteri);
+                    await _context.SaveChangesAsync();
+                    MusteriListele();
+                    if (flowLayoutPanel2.Controls.Count != 0)
                     {
-                        PictureBox pictureBox = (PictureBox)c;
-                        string resimPath = pictureBox.ImageLocation;
-                        CImage image = new CImage();
-                        image.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
-                        image.MusteriId = musteri.Id;
-                        _context.CImages.Add(image);
-                        await _context.SaveChangesAsync();
-                        sayac++;
+                        int sayac = 1;
+                        foreach (Control c in flowLayoutPanel2.Controls)
+                        {
+                            PictureBox pictureBox = (PictureBox)c;
+                            string resimPath = pictureBox.ImageLocation;
+                            CImage image = new CImage();
+                            image.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
+                            image.MusteriId = musteri.Id;
+                            _context.CImages.Add(image);
+                            await _context.SaveChangesAsync();
+                            sayac++;
+                        }
                     }
-                }
                     txtAdSoyad.Text = "";
-                    flowLayoutPanel2.Controls.Clear();  
-                MessageBox.Show("Kayýt Ýþlemi Baþarýlý");
+                    flowLayoutPanel2.Controls.Clear();
+                    MessageBox.Show("Kayýt Ýþlemi Baþarýlý");
 
-            }
-            catch (Exception hata)
-            {
-                MessageBox.Show("Kayýt iþlemi sýrasýnda bir sorun oluþtu " + hata);
-            }
+                }
+                catch (Exception hata)
+                {
+                    MessageBox.Show("Kayýt iþlemi sýrasýnda bir sorun oluþtu " + hata);
+                }
             }
             else
             {
@@ -76,45 +81,84 @@ public partial class Form1 : Form
             {
                 long id = Convert.ToInt64(txtKulId.Text);
                 var musteri = _context.Musteris.First(x => x.Id == id);
-                musteri.AdSoyad = txtAdSoyad.Text;
-                var images = _context.CImages.Where(x => x.MusteriId == id);
-                if (images.Any())
+                if (DeleteImages != null)
                 {
 
+                    foreach (var x in DeleteImages) //Silinecek resimleri sil
+                    {
+                        var delImage = _context.CImages.FirstOrDefault(p => p.Id == x);
+                        if (delImage != null)
+                        {
+                            _context.CImages.Remove(delImage);
+                        }
+                    }
+                    DeleteImages.Clear();
                 }
-                foreach (var image in images)
+                _context.SaveChanges();
+                if (musteri.AdSoyad != txtAdSoyad.Text.Trim())//Ýsmin farklý olduðu durumlar
                 {
-                    int sayac = 1;
-                    bool durum = false;
-                    foreach (Control c in flowLayoutPanel2.Controls)
+                    var updImage = _context.CImages.Where(x => x.MusteriId == id).ToList();
+                    foreach (var x in updImage)
                     {
-                        PictureBox pictureBox = (PictureBox)c;
-                        string resimPath = pictureBox.ImageLocation;
-                        if (imagesFilePath + image.ImagePath == resimPath)
+                        string resimYolu = imagesFilePath + x.ImagePath;// Deðiþtirmek istediðiniz resmin mevcut yolu
+                        x.ImagePath = x.ImagePath.Replace(musteri.AdSoyad, txtAdSoyad.Text.Trim());
+                        string yeniAd = x.ImagePath; // Yeni ad
+
+                        if (File.Exists(resimYolu))
                         {
-                            durum = true;
+                            string hedefYol = Path.Combine(Path.GetDirectoryName(resimYolu), yeniAd);
+
+                            try
+                            {
+                                File.Move(resimYolu, hedefYol);
+                                Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
+                            }
+                            catch (Exception erorr)
+                            {
+                                Console.WriteLine("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
+                            }
                         }
-                        if (pictureBox.Tag == null && sayac == 1)
+                        else
                         {
-                            CImage img = new CImage();
-                            img.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
-                            img.MusteriId = musteri.Id;
-                            _context.CImages.Add(img);
+                            Console.WriteLine("Belirtilen dosya bulunamadý.");
                         }
-                        sayac++;
+                        _context.CImages.Update(x);
                     }
-                    if (!durum)
+                    _context.SaveChanges();
+                }
+                musteri.AdSoyad = txtAdSoyad.Text;
+                int sayac = 1;
+                foreach (Control c in flowLayoutPanel2.Controls)
+                {
+                    PictureBox pictureBox = (PictureBox)c;
+                    string resimPath = pictureBox.ImageLocation;
+                    if (pictureBox.Tag == null)
                     {
-                        _context.CImages.Remove(image);
+                        CImage img = new CImage();
+                        img.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
+                        img.MusteriId = musteri.Id;
+                        _context.CImages.Add(img);
                     }
+                    sayac++;
                 }
                 await _context.SaveChangesAsync();
+                lblAd.Text = musteri.AdSoyad;
+                var images = _context.CImages.Where(x => x.MusteriId == musteri.Id).ToList();
+                flowLayoutPanel1.Controls.Clear();
+                if (images.Count > 0)
+                {
+                    ListeleResimler(images.Select(x => x.ImagePath).ToArray(), images.Select(x => x.Id).ToArray(), 0);
+                }
                 MessageBox.Show("Güncelleme Ýþlemi Baþarýlý");
+                MusteriListele();
                 btnNoUpdate_Click(sender, e);
             }
         }
         #endregion
     }
+    ///<summary>
+    ///Müþteri Verilerini DataGridView e Listeler
+    ///</summary>
     private void MusteriListele()
     {
         var musteriler = _context.Musteris.ToList();
@@ -155,7 +199,7 @@ public partial class Form1 : Form
                     //MessageBox.Show($"Týklanan resim: {pictureBox.ImageLocation}");
                     // Yeni bir Form (popup) oluþturun
                     Form yeniPopup = new Form();
-                    yeniPopup.Text = $"{pictureBox.ImageLocation}";
+                    yeniPopup.Text = $"{Path.GetFileName(pictureBox.ImageLocation)}";
                     // Yeni bir PictureBox kontrolü oluþturun ve resmi yükleyin
                     PictureBox yeniPictureBox = new PictureBox();
                     yeniPictureBox.Image = pictureBox.Image; // Orijinal PictureBox'tan resmi alýn
@@ -175,6 +219,10 @@ public partial class Form1 : Form
                     silMenuItem.Click += (senderMenuItem, eMenuItem) =>
                     {
                         flowLayoutPanel2.Controls.Remove(pictureBox); // PictureBox'ý FlowLayoutPanel'dan kaldýr
+                        if (pictureBox.Tag != null)
+                        {
+                            DeleteImages.Add(Convert.ToInt64(pictureBox.Tag));
+                        }
                     };
                     flowLayoutPanel2.ContextMenuStrip.Items.Add(silMenuItem);
                 }
@@ -236,10 +284,10 @@ public partial class Form1 : Form
     private void textBox1_TextChanged(object sender, EventArgs e)
     {
         #region Arama Ýþlemi
-        string search = textBox1.Text.Trim();
-        if (search.Count() > 0)
+        string searchUp = textBox1.Text.Trim().ToUpper(new CultureInfo("tr-TR", false));
+        if (searchUp.Count() > 0)
         { //Arama yapýlacak
-            var veri = _context.Musteris.Where(x => x.AdSoyad.ToLower().Contains(search.ToLower()) || x.AdSoyad.ToUpper().Contains(search.ToUpper())||x.AdSoyad.Contains(search));
+            var veri = _context.Musteris.AsEnumerable().Where(x => x.AdSoyad.ToUpper(new CultureInfo("tr-TR", false)).Contains(searchUp)).ToList();
             dataGridView1.Rows.Clear();
             foreach (var item in veri)
             {
@@ -279,6 +327,10 @@ public partial class Form1 : Form
         btnEkle.Text = "Ekle";
         tabControl1.SelectTab(tabPage1);
         btnNoUpdate.Visible = false;
+        if (DeleteImages != null)
+        {
+            DeleteImages.Clear();
+        }
     }
 
     private void btnKayitSil_Click(object sender, EventArgs e)
@@ -306,9 +358,9 @@ public partial class Form1 : Form
                         btnGoUpdate.Enabled = false;
                         btnKayitSil.Enabled = false;
                         lblAd.Text = "";
-                        if(textBox1.Text.Length > 0)
+                        if (textBox1.Text.Length > 0)
                         {
-                            textBox1_TextChanged(sender,e);
+                            textBox1_TextChanged(sender, e);
                         }
                         else
                         {
@@ -331,5 +383,35 @@ public partial class Form1 : Form
             }
         }
         #endregion
+    }
+    /// <summary>
+    /// Türkçe ToLower Ýþlemi
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns>String</returns>
+    public static string ToTurkishLower(string text)
+    {
+        var culture = new CultureInfo("tr-TR");
+        return text.ToLower(culture);
+    }
+
+    private void tabPage1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void panel4_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
+
+    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
+    private void panel5_Paint(object sender, PaintEventArgs e)
+    {
+
     }
 }
