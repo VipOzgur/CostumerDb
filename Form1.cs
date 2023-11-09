@@ -196,21 +196,29 @@ public partial class Form1 : Form
             {
                 if (e.Button == MouseButtons.Left)
                 {
+                    PictureBox clickedPictureBox = (PictureBox)sender; // Týklanan PictureBox'ý alýn
+
+                    Control.ControlCollection controls = (flowLayoutPanel1.Controls.Contains(clickedPictureBox)) ? flowLayoutPanel1.Controls : flowLayoutPanel2.Controls;
+                    int index = controls.IndexOf(clickedPictureBox);
+                    int lastindex = controls.Count - 1;
+                    Form2 form2 = new Form2(index, lastindex, controls);
+                    form2.Show();
+
                     //MessageBox.Show($"Týklanan resim: {pictureBox.ImageLocation}");
                     // Yeni bir Form (popup) oluþturun
-                    Form yeniPopup = new Form();
-                    yeniPopup.Text = $"{Path.GetFileName(pictureBox.ImageLocation)}";
-                    // Yeni bir PictureBox kontrolü oluþturun ve resmi yükleyin
-                    PictureBox yeniPictureBox = new PictureBox();
-                    yeniPictureBox.Image = pictureBox.Image; // Orijinal PictureBox'tan resmi alýn
-                    yeniPictureBox.Dock = DockStyle.Fill; // Resmi Form'un boyutuna sýðacak þekilde ayarlayýn
-                    yeniPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                    /* Form yeniPopup = new Form();
+                     yeniPopup.Text = $"{Path.GetFileName(pictureBox.ImageLocation)}";
+                     // Yeni bir PictureBox kontrolü oluþturun ve resmi yükleyin
+                     PictureBox yeniPictureBox = new PictureBox();
+                     yeniPictureBox.Image = pictureBox.Image; // Orijinal PictureBox'tan resmi alýn
+                     yeniPictureBox.Dock = DockStyle.Fill; // Resmi Form'un boyutuna sýðacak þekilde ayarlayýn
+                     yeniPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 
-                    // PictureBox'ý yeni Form'un içine ekleyin
-                    yeniPopup.Controls.Add(yeniPictureBox);
+                     // PictureBox'ý yeni Form'un içine ekleyin
+                     yeniPopup.Controls.Add(yeniPictureBox);
 
-                    // Yeni Form'u gösterin
-                    yeniPopup.ShowDialog();
+                     // Yeni Form'u gösterin
+                     yeniPopup.ShowDialog(); */
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
