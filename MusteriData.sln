@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusteriData", "MusteriData.csproj", "{D97C25D0-0B2B-43FF-B642-63F2E16FB525}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MusteriDataSetup", "..\MusteriDataSetup\MusteriDataSetup.vdproj", "{49C65271-977E-423B-9360-870B892D2D21}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,11 +12,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D97C25D0-0B2B-43FF-B642-63F2E16FB525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D97C25D0-0B2B-43FF-B642-63F2E16FB525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D97C25D0-0B2B-43FF-B642-63F2E16FB525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D97C25D0-0B2B-43FF-B642-63F2E16FB525}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49C65271-977E-423B-9360-870B892D2D21}.Debug|Any CPU.ActiveCfg = Debug
-		{49C65271-977E-423B-9360-870B892D2D21}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

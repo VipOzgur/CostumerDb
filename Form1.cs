@@ -11,7 +11,6 @@ public partial class Form1 : Form
     private readonly CustomerDbContext _context;
     private readonly string imagesFilePath = $"{Application.StartupPath}\\images\\";
     List<long> DeleteImages = new List<long>();
-    CultureInfo culture = new CultureInfo("tr-TR");
     public Form1()
     {
         _context = new CustomerDbContext();
@@ -21,6 +20,7 @@ public partial class Form1 : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
+        btnNoUpdate.Visible = true;
         dataGridView1.MultiSelect = false;
         MusteriListele();
     }
@@ -111,11 +111,11 @@ public partial class Form1 : Form
                             try
                             {
                                 File.Move(resimYolu, hedefYol);
-                                Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
+                                //Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
                             }
                             catch (Exception erorr)
                             {
-                                Console.WriteLine("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
+                                MessageBox.Show("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
                             }
                         }
                         else
@@ -322,7 +322,6 @@ public partial class Form1 : Form
         {
             ListeleResimler(images.Select(x => x.ImagePath).ToArray(), images.Select(x => x.Id).ToArray(), 1);
         }
-        btnNoUpdate.Visible = true;
         tabControl1.SelectTab(tabPage2);
     }
 
@@ -334,7 +333,6 @@ public partial class Form1 : Form
         tabPage2.Text = "Ekle";
         btnEkle.Text = "Ekle";
         tabControl1.SelectTab(tabPage1);
-        btnNoUpdate.Visible = false;
         if (DeleteImages != null)
         {
             DeleteImages.Clear();
@@ -391,16 +389,6 @@ public partial class Form1 : Form
             }
         }
         #endregion
-    }
-    /// <summary>
-    /// Türkçe ToLower Ýþlemi
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns>String</returns>
-    public static string ToTurkishLower(string text)
-    {
-        var culture = new CultureInfo("tr-TR");
-        return text.ToLower(culture);
     }
 
     private void tabPage1_Click(object sender, EventArgs e)
