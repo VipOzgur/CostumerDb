@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace yeni.Models;
+namespace MusteriData.Models;
 
 public partial class CustomerDbContext : DbContext
 {
@@ -19,7 +19,7 @@ public partial class CustomerDbContext : DbContext
 
     public virtual DbSet<Musteri> Musteris { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseSqlite($"Data Source={Application.StartupPath}data\\CustomerDb.db");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite($"Data Source={Application.StartupPath}data\\CustomerDb.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,6 +42,7 @@ public partial class CustomerDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AdSoyad).HasColumnName("adSoyad");
+            entity.Property(e => e.UploadDate).HasColumnName("uploadDate");
         });
 
         OnModelCreatingPartial(modelBuilder);

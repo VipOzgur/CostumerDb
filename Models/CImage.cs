@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace yeni.Models;
+namespace MusteriData.Models;
 
 public partial class CImage
 {

@@ -33,6 +33,7 @@ partial class Form1
         tabPage1 = new TabPage();
         panel3 = new Panel();
         panel4 = new Panel();
+        label2 = new Label();
         btnKayitSil = new Button();
         btnGoUpdate = new Button();
         lblAd = new Label();
@@ -43,8 +44,9 @@ partial class Form1
         textBox1 = new TextBox();
         panel2 = new Panel();
         dataGridView1 = new DataGridView();
-        Id = new DataGridViewTextBoxColumn();
         nameColumn = new DataGridViewTextBoxColumn();
+        uploadDate = new DataGridViewTextBoxColumn();
+        Id = new DataGridViewTextBoxColumn();
         tabPage2 = new TabPage();
         panel6 = new Panel();
         flowLayoutPanel2 = new FlowLayoutPanel();
@@ -82,7 +84,6 @@ partial class Form1
         tabPage1.Controls.Add(panel1);
         tabPage1.Name = "tabPage1";
         tabPage1.UseVisualStyleBackColor = true;
-        tabPage1.Click += tabPage1_Click;
         // 
         // panel3
         // 
@@ -95,11 +96,16 @@ partial class Form1
         // 
         resources.ApplyResources(panel4, "panel4");
         panel4.BackColor = Color.WhiteSmoke;
+        panel4.Controls.Add(label2);
         panel4.Controls.Add(btnKayitSil);
         panel4.Controls.Add(btnGoUpdate);
         panel4.Controls.Add(lblAd);
         panel4.Name = "panel4";
-        panel4.Paint += panel4_Paint;
+        // 
+        // label2
+        // 
+        resources.ApplyResources(label2, "label2");
+        label2.Name = "label2";
         // 
         // btnKayitSil
         // 
@@ -147,7 +153,6 @@ partial class Form1
         resources.ApplyResources(panel5, "panel5");
         panel5.Controls.Add(textBox1);
         panel5.Name = "panel5";
-        panel5.Paint += panel5_Paint;
         // 
         // textBox1
         // 
@@ -172,7 +177,7 @@ partial class Form1
         dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dataGridView1.BackgroundColor = Color.WhiteSmoke;
         dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, nameColumn });
+        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameColumn, uploadDate, Id });
         dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
         dataGridView1.GridColor = Color.DarkGray;
         dataGridView1.MultiSelect = false;
@@ -184,16 +189,6 @@ partial class Form1
         dataGridView1.ShowCellToolTips = false;
         dataGridView1.ShowEditingIcon = false;
         dataGridView1.CellClick += dataGridView1_CellClick;
-        dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-        // 
-        // Id
-        // 
-        Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-        Id.FillWeight = 51.3369F;
-        resources.ApplyResources(Id, "Id");
-        Id.Name = "Id";
-        Id.ReadOnly = true;
-        Id.Resizable = DataGridViewTriState.False;
         // 
         // nameColumn
         // 
@@ -204,6 +199,22 @@ partial class Form1
         nameColumn.ReadOnly = true;
         nameColumn.Resizable = DataGridViewTriState.True;
         nameColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // uploadDate
+        // 
+        uploadDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        resources.ApplyResources(uploadDate, "uploadDate");
+        uploadDate.Name = "uploadDate";
+        uploadDate.ReadOnly = true;
+        // 
+        // Id
+        // 
+        Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+        Id.FillWeight = 51.3369F;
+        resources.ApplyResources(Id, "Id");
+        Id.Name = "Id";
+        Id.ReadOnly = true;
+        Id.Resizable = DataGridViewTriState.False;
         // 
         // tabPage2
         // 
@@ -319,7 +330,9 @@ partial class Form1
     private Panel panel4;
     private Panel panel5;
     private Panel panel6;
-    private DataGridViewTextBoxColumn Id;
-    private DataGridViewTextBoxColumn nameColumn;
     private Panel panel7;
+    private Label label2;
+    private DataGridViewTextBoxColumn nameColumn;
+    private DataGridViewTextBoxColumn uploadDate;
+    private DataGridViewTextBoxColumn Id;
 }

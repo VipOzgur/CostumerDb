@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Linq;
-using yeni.Models;
+using MusteriData.Models;
 
 namespace yeni;
 
@@ -15,11 +15,11 @@ public partial class Form1 : Form
     {
         _context = new CustomerDbContext();
         InitializeComponent();
-
     }
 
     private void Form1_Load(object sender, EventArgs e)
     {
+        label2.Text = "";
         btnNoUpdate.Visible = true;
         dataGridView1.MultiSelect = false;
         MusteriListele();
@@ -41,6 +41,7 @@ public partial class Form1 : Form
                 {
                     Musteri musteri = new Musteri();
                     musteri.AdSoyad = txtAdSoyad.Text;
+                    musteri.UploadDate = $"{new CultureInfo("tr-TR").DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek)}  {DateTime.Now.ToString("dd/MM/yyyy HH-mm")}";
                     _context.Musteris.Add(musteri);
                     await _context.SaveChangesAsync();
                     MusteriListele();
@@ -111,11 +112,11 @@ public partial class Form1 : Form
                             try
                             {
                                 File.Move(resimYolu, hedefYol);
-                                //Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
+                                Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
                             }
                             catch (Exception erorr)
                             {
-                                MessageBox.Show("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
+                                Console.WriteLine("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
                             }
                         }
                         else
@@ -143,6 +144,7 @@ public partial class Form1 : Form
                 }
                 await _context.SaveChangesAsync();
                 lblAd.Text = musteri.AdSoyad;
+                label2.Text = musteri.UploadDate;
                 var images = _context.CImages.Where(x => x.MusteriId == musteri.Id).ToList();
                 flowLayoutPanel1.Controls.Clear();
                 if (images.Count > 0)
@@ -165,7 +167,7 @@ public partial class Form1 : Form
         dataGridView1.Rows.Clear();
         foreach (var item in musteriler)
         {
-            dataGridView1.Rows.Add(item.Id, item.AdSoyad);
+            dataGridView1.Rows.Add(item.AdSoyad, item.UploadDate, item.Id);
         }
     }
 
@@ -203,22 +205,6 @@ public partial class Form1 : Form
                     int lastindex = controls.Count - 1;
                     Form2 form2 = new Form2(index, lastindex, controls);
                     form2.Show();
-
-                    //MessageBox.Show($"Týklanan resim: {pictureBox.ImageLocation}");
-                    // Yeni bir Form (popup) oluþturun
-                    /* Form yeniPopup = new Form();
-                     yeniPopup.Text = $"{Path.GetFileName(pictureBox.ImageLocation)}";
-                     // Yeni bir PictureBox kontrolü oluþturun ve resmi yükleyin
-                     PictureBox yeniPictureBox = new PictureBox();
-                     yeniPictureBox.Image = pictureBox.Image; // Orijinal PictureBox'tan resmi alýn
-                     yeniPictureBox.Dock = DockStyle.Fill; // Resmi Form'un boyutuna sýðacak þekilde ayarlayýn
-                     yeniPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
-                     // PictureBox'ý yeni Form'un içine ekleyin
-                     yeniPopup.Controls.Add(yeniPictureBox);
-
-                     // Yeni Form'u gösterin
-                     yeniPopup.ShowDialog(); */
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
@@ -278,6 +264,7 @@ public partial class Form1 : Form
         btnKayitSil.Enabled = true;
         lblAd.Text = dataGridView1.Rows[e.RowIndex].Cells["nameColumn"].Value.ToString();
         int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+        label2.Text = dataGridView1.Rows[e.RowIndex].Cells["uploadDate"].Value.ToString();
         btnGoUpdate.Tag = id;
         btnKayitSil.Tag = id;
         var images = _context.CImages.Where(x => x.MusteriId == id).ToList();
@@ -299,7 +286,7 @@ public partial class Form1 : Form
             dataGridView1.Rows.Clear();
             foreach (var item in veri)
             {
-                dataGridView1.Rows.Add(item.Id, item.AdSoyad);
+                dataGridView1.Rows.Add(item.AdSoyad, item.UploadDate, item.Id);
             }
         }
         else
@@ -322,6 +309,7 @@ public partial class Form1 : Form
         {
             ListeleResimler(images.Select(x => x.ImagePath).ToArray(), images.Select(x => x.Id).ToArray(), 1);
         }
+        //btnNoUpdate.Visible = true;
         tabControl1.SelectTab(tabPage2);
     }
 
@@ -333,6 +321,7 @@ public partial class Form1 : Form
         tabPage2.Text = "Ekle";
         btnEkle.Text = "Ekle";
         tabControl1.SelectTab(tabPage1);
+        //btnNoUpdate.Visible = false;
         if (DeleteImages != null)
         {
             DeleteImages.Clear();
@@ -364,6 +353,7 @@ public partial class Form1 : Form
                         btnGoUpdate.Enabled = false;
                         btnKayitSil.Enabled = false;
                         lblAd.Text = "";
+                        label2.Text = "";
                         if (textBox1.Text.Length > 0)
                         {
                             textBox1_TextChanged(sender, e);
@@ -389,25 +379,5 @@ public partial class Form1 : Form
             }
         }
         #endregion
-    }
-
-    private void tabPage1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void panel4_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
-
-    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-    {
-
-    }
-
-    private void panel5_Paint(object sender, PaintEventArgs e)
-    {
-
     }
 }
