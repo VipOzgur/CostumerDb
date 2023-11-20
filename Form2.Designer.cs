@@ -44,7 +44,7 @@
             pictureBox1.BackColor = Color.WhiteSmoke;
             pictureBox1.Location = new Point(409, 179);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(280, 213);
+            pictureBox1.Size = new Size(280, 221);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -66,7 +66,7 @@
             // 
             btnBuyut.Anchor = AnchorStyles.Bottom;
             btnBuyut.BackColor = Color.Transparent;
-            btnBuyut.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBuyut.Font = new Font("Segoe UI", 20F);
             btnBuyut.Location = new Point(594, 546);
             btnBuyut.Name = "btnBuyut";
             btnBuyut.Size = new Size(94, 56);
@@ -79,7 +79,7 @@
             // 
             btnKucult.Anchor = AnchorStyles.Bottom;
             btnKucult.BackColor = Color.Transparent;
-            btnKucult.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            btnKucult.Font = new Font("Segoe UI", 20F);
             btnKucult.Location = new Point(441, 546);
             btnKucult.Name = "btnKucult";
             btnKucult.Size = new Size(94, 56);
@@ -92,7 +92,7 @@
             // 
             btnGeri.Anchor = AnchorStyles.Left;
             btnGeri.BackColor = Color.Transparent;
-            btnGeri.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            btnGeri.Font = new Font("Segoe UI", 20F);
             btnGeri.Location = new Point(39, 244);
             btnGeri.Name = "btnGeri";
             btnGeri.Size = new Size(94, 59);
@@ -105,7 +105,7 @@
             // 
             btnIleri.Anchor = AnchorStyles.Right;
             btnIleri.BackColor = Color.Transparent;
-            btnIleri.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            btnIleri.Font = new Font("Segoe UI", 20F);
             btnIleri.Location = new Point(1003, 244);
             btnIleri.Name = "btnIleri";
             btnIleri.Size = new Size(94, 59);

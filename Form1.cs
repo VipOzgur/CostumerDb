@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Linq;
 using MusteriData.Models;
 using MusteriData;
+using System.Drawing.Imaging;
 
 namespace yeni;
 
@@ -27,7 +28,7 @@ public partial class Form1 : Form
     }
     private async void btnEkle_Click(object sender, EventArgs e)
     {
-        #region Kayýt Ekleme
+        #region Kayýt Ekleme && Güncelleme
         if (string.IsNullOrEmpty(txtAdSoyad.Text))
         {
             MessageBox.Show("Ad alanýný boþ býrakmayýnýz");
@@ -52,9 +53,16 @@ public partial class Form1 : Form
                         foreach (Control c in flowLayoutPanel2.Controls)
                         {
                             PictureBox pictureBox = (PictureBox)c;
-                            string resimPath = pictureBox.ImageLocation;
                             CImage image = new CImage();
-                            image.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
+                            if (pictureBox.ImageLocation != null)
+                            {
+                                string resimPath = pictureBox.ImageLocation;
+                                image.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_" + sayac + Path.GetExtension(resimPath));
+                            }
+                            else
+                            {
+                                image.ImagePath = ResimKaydet(pictureBox.Image, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_" + sayac);
+                            }
                             image.MusteriId = musteri.Id;
                             _context.CImages.Add(image);
                             await _context.SaveChangesAsync();
@@ -75,7 +83,7 @@ public partial class Form1 : Form
             {
                 return;
             }
-        }
+        }//Güncelleme iþlemi
         else
         {
             DialogResult dior = MessageBox.Show("Veri Güncellensin mi?", "Onayla", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -113,11 +121,11 @@ public partial class Form1 : Form
                             try
                             {
                                 File.Move(resimYolu, hedefYol);
-                                Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
+                                //Console.WriteLine("Resim adý baþarýyla deðiþtirildi.");
                             }
                             catch (Exception erorr)
                             {
-                                Console.WriteLine("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
+                                //Console.WriteLine("Resim adý deðiþtirilirken bir hata oluþtu: " + erorr.Message);
                             }
                         }
                         else
@@ -133,11 +141,18 @@ public partial class Form1 : Form
                 foreach (Control c in flowLayoutPanel2.Controls)
                 {
                     PictureBox pictureBox = (PictureBox)c;
-                    string resimPath = pictureBox.ImageLocation;
                     if (pictureBox.Tag == null)
                     {
                         CImage img = new CImage();
-                        img.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "-" + sayac + Path.GetExtension(resimPath));
+                        if (pictureBox.ImageLocation != null)
+                        {
+                            string resimPath = pictureBox.ImageLocation;
+                            img.ImagePath = ResimKaydet(resimPath, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_" + sayac + Path.GetExtension(resimPath));
+                        }
+                        else
+                        {
+                            img.ImagePath = ResimKaydet(pictureBox.Image, txtAdSoyad.Text + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_" + sayac);
+                        }
                         img.MusteriId = musteri.Id;
                         _context.CImages.Add(img);
                     }
@@ -253,6 +268,11 @@ public partial class Form1 : Form
     private string ResimKaydet(string resimYolu, string dosyaAdi)
     {
         File.Copy(resimYolu, imagesFilePath + dosyaAdi, true);
+        return dosyaAdi;
+    }
+    private string ResimKaydet(Image img, string dosyaAdi)
+    {
+        img.Save(imagesFilePath + dosyaAdi, ImageFormat.Jpeg);
         return dosyaAdi;
     }
 

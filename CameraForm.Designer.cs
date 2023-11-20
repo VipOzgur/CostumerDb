@@ -33,13 +33,17 @@
             pictureBox1 = new PictureBox();
             btnResimCek = new Button();
             btnKaydet = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(33, 45);
+            label1.Location = new Point(25, 47);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(100, 28);
@@ -49,7 +53,7 @@
             // comboBoxKameralar
             // 
             comboBoxKameralar.FormattingEnabled = true;
-            comboBoxKameralar.Location = new Point(150, 42);
+            comboBoxKameralar.Location = new Point(133, 44);
             comboBoxKameralar.Margin = new Padding(4);
             comboBoxKameralar.Name = "comboBoxKameralar";
             comboBoxKameralar.Size = new Size(468, 36);
@@ -58,17 +62,19 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(33, 153);
+            pictureBox1.BackColor = SystemColors.Control;
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1168, 498);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new Size(934, 556);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
             // btnResimCek
             // 
-            btnResimCek.Location = new Point(646, 36);
+            btnResimCek.Location = new Point(629, 38);
             btnResimCek.Name = "btnResimCek";
             btnResimCek.Size = new Size(113, 47);
             btnResimCek.TabIndex = 3;
@@ -79,7 +85,7 @@
             // btnKaydet
             // 
             btnKaydet.Enabled = false;
-            btnKaydet.Location = new Point(793, 36);
+            btnKaydet.Location = new Point(776, 38);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(113, 47);
             btnKaydet.TabIndex = 4;
@@ -87,24 +93,48 @@
             btnKaydet.UseVisualStyleBackColor = true;
             btnKaydet.Click += btnKaydet_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(comboBoxKameralar);
+            panel1.Controls.Add(btnKaydet);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnResimCek);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(5, 5);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(934, 151);
+            panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Transparent;
+            panel2.Controls.Add(pictureBox1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(5, 156);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(934, 556);
+            panel2.TabIndex = 6;
+            // 
             // CameraForm
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1272, 717);
-            Controls.Add(btnKaydet);
-            Controls.Add(btnResimCek);
-            Controls.Add(pictureBox1);
-            Controls.Add(comboBoxKameralar);
-            Controls.Add(label1);
+            ClientSize = new Size(944, 717);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
+            MinimumSize = new Size(962, 764);
             Name = "CameraForm";
-            Text = "CameraForm";
+            Padding = new Padding(5);
+            Text = "Kamera";
+            WindowState = FormWindowState.Maximized;
             Load += CameraForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -114,5 +144,7 @@
         private PictureBox pictureBox1;
         private Button btnResimCek;
         private Button btnKaydet;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

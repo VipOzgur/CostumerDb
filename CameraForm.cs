@@ -12,7 +12,7 @@ public partial class CameraForm : Form
         InitializeComponent();
         foreach (var descriptor in devices.EnumerateDescriptors())
         {
-            if(descriptor.Characteristics.Length > 0)
+            if (descriptor.Characteristics.Length > 0)
             {
                 comboBoxKameralar.Items.Add(descriptor.Name);
                 //comboBoxKameralar.
@@ -21,7 +21,7 @@ public partial class CameraForm : Form
         comboBoxKameralar.SelectedIndex = 0;
         //KayitOnAsync();
     }
-    
+
 
     private void CameraForm_Load(object sender, EventArgs e)
     {
@@ -31,34 +31,48 @@ public partial class CameraForm : Form
     }
     private async Task KayitOnAsync()
     {
-        if (device != null)
-           await device.StopAsync();
-        // Open a device with a video characteristics:
-        var descriptor0 = devices.EnumerateDescriptors().ElementAt(comboBoxKameralar.SelectedIndex);
 
-        device = await descriptor0.OpenAsync(
-   descriptor0.Characteristics[0],
-   async bufferScope =>
-   {
-       // Captured into a pixel buffer from an argument.
+        try
+        {
+            // Open a device with a video characteristics:
+            var descriptor0 = devices.EnumerateDescriptors().ElementAt(comboBoxKameralar.SelectedIndex);
+            if (descriptor0.Characteristics.Length > 0)
+            {
+                if (device != null)
+                {
+                    await device.StopAsync();
+                    await device.DisposeAsync();
+                }
+                device = await descriptor0.OpenAsync(descriptor0.Characteristics[0],
+                async bufferScope =>
+                {
+                    // Captured into a pixel buffer from an argument.
 
-       // Get image data (Maybe DIB/JPEG/PNG):
-       byte[] image = bufferScope.Buffer.ExtractImage();
+                    // Get image data (Maybe DIB/JPEG/PNG):
+                    byte[] image = bufferScope.Buffer.ExtractImage();
 
-       // Anything use of it...
-       var ms = new MemoryStream(image);
-       var bitmap = Bitmap.FromStream(ms);
-       //if (bitmap != null)
-       pictureBox1.Image = bitmap;
-   });
+                    // Anything use of it...
+                    var ms = new MemoryStream(image);
+                    var bitmap = Bitmap.FromStream(ms);
+                    if (bitmap != null)
+                        pictureBox1.Image = bitmap;
+                });
+            }
 
-        await device.StartAsync();
+            await device.StartAsync();
+
+        }
+        catch (Exception hata)
+        {
+
+            MessageBox.Show("Başka bir cihaz seçin");
+        }
 
     }
 
     private async void comboBoxKameralar_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+
         await KayitOnAsync();
     }
     private void ResimCek()
@@ -66,7 +80,7 @@ public partial class CameraForm : Form
         Image resim = pictureBox1.Image;
         if (resim != null)
         {
-            device.Stop();
+            device.StopAsync();
             pictureBox1.Image = resim;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             btnResimCek.Text = "Yeniden Çek";
@@ -82,7 +96,7 @@ public partial class CameraForm : Form
         }
         else
         {
-            device.Start();
+            device.StartAsync();
             btnResimCek.Text = "Çek";
             pictureBox1.BorderStyle = BorderStyle.None;
             btnKaydet.Enabled = false;
@@ -97,9 +111,9 @@ public partial class CameraForm : Form
 
     }
 
-    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        KayitOnAsync();
+        await KayitOnAsync();
     }
 }
 
