@@ -6,6 +6,25 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
+      "FlashCap/1.8.0": {
+        "dependencies": {
+          "FlashCap.Core": "1.8.0"
+        },
+        "runtime": {
+          "lib/net7.0/FlashCap.dll": {
+            "assemblyVersion": "1.8.0.0",
+            "fileVersion": "2023.11.16.20613"
+          }
+        }
+      },
+      "FlashCap.Core/1.8.0": {
+        "runtime": {
+          "lib/net7.0/FlashCap.Core.dll": {
+            "assemblyVersion": "1.8.0.0",
+            "fileVersion": "2023.11.16.20613"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -209,6 +228,22 @@
           }
         }
       },
+      "Microsoft.Win32.SystemEvents/8.0.0": {
+        "runtime": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -381,6 +416,25 @@
           }
         }
       },
+      "System.Device.Gpio/3.1.0": {
+        "runtime": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.23.56604"
+          }
+        }
+      },
+      "System.Drawing.Common/8.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "8.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53105"
+          }
+        }
+      },
       "System.Memory/4.5.3": {},
       "System.Text.Encodings.Web/7.0.0": {
         "runtime": {
@@ -412,6 +466,20 @@
     }
   },
   "libraries": {
+    "FlashCap/1.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s+ZE1TDxf9k8yt6+YM8DPQBSXjOEPgGLwXxCmIV7qL6hFZ1bS3UAcJBGB5XVm7PoAQXVflXQTsjlxft77Hxu0w==",
+      "path": "flashcap/1.8.0",
+      "hashPath": "flashcap.1.8.0.nupkg.sha512"
+    },
+    "FlashCap.Core/1.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-g6A8DafV9cL9iEClJl2qTIyOwbFf9eTf0LE5O+wLG5AjxMIUz3w9a1bkcuV8dA0OgG+bN6aTwar2IY3p4xaF1w==",
+      "path": "flashcap.core/1.8.0",
+      "hashPath": "flashcap.core.1.8.0.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -552,6 +620,13 @@
       "path": "microsoft.extensions.primitives/7.0.0",
       "hashPath": "microsoft.extensions.primitives.7.0.0.nupkg.sha512"
     },
+    "Microsoft.Win32.SystemEvents/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw==",
+      "path": "microsoft.win32.systemevents/8.0.0",
+      "hashPath": "microsoft.win32.systemevents.8.0.0.nupkg.sha512"
+    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
@@ -593,6 +668,20 @@
       "sha512": "sha512-2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "path": "system.codedom/4.4.0",
       "hashPath": "system.codedom.4.4.0.nupkg.sha512"
+    },
+    "System.Device.Gpio/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4Jw7+lTwdU63zsaD9a6H47YC/LK6lGhi3SKBGdf1jV0ySj22NJkglQ35dBZWbtwiXOzbBn3Gl8XzIcpv1pai3Q==",
+      "path": "system.device.gpio/3.1.0",
+      "hashPath": "system.device.gpio.3.1.0.nupkg.sha512"
+    },
+    "System.Drawing.Common/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JkbHJjtI/dWc5dfmEdJlbe3VwgZqCkZRtfuWFh5GOv0f+gGCfBtzMpIVkmdkj2AObO9y+oiOi81UGwH3aBYuqA==",
+      "path": "system.drawing.common/8.0.0",
+      "hashPath": "system.drawing.common.8.0.0.nupkg.sha512"
     },
     "System.Memory/4.5.3": {
       "type": "package",

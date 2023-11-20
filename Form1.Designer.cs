@@ -48,6 +48,7 @@ partial class Form1
         uploadDate = new DataGridViewTextBoxColumn();
         Id = new DataGridViewTextBoxColumn();
         tabPage2 = new TabPage();
+        btnOpenCamera = new Button();
         panel6 = new Panel();
         flowLayoutPanel2 = new FlowLayoutPanel();
         btnNoUpdate = new Button();
@@ -220,6 +221,7 @@ partial class Form1
         // 
         resources.ApplyResources(tabPage2, "tabPage2");
         tabPage2.BackColor = Color.WhiteSmoke;
+        tabPage2.Controls.Add(btnOpenCamera);
         tabPage2.Controls.Add(panel6);
         tabPage2.Controls.Add(btnNoUpdate);
         tabPage2.Controls.Add(txtKulId);
@@ -228,6 +230,13 @@ partial class Form1
         tabPage2.Controls.Add(txtAdSoyad);
         tabPage2.Controls.Add(label4);
         tabPage2.Name = "tabPage2";
+        // 
+        // btnOpenCamera
+        // 
+        resources.ApplyResources(btnOpenCamera, "btnOpenCamera");
+        btnOpenCamera.Name = "btnOpenCamera";
+        btnOpenCamera.UseVisualStyleBackColor = true;
+        btnOpenCamera.Click += btnOpenCamera_Click;
         // 
         // panel6
         // 
@@ -335,4 +344,5 @@ partial class Form1
     private DataGridViewTextBoxColumn nameColumn;
     private DataGridViewTextBoxColumn uploadDate;
     private DataGridViewTextBoxColumn Id;
+    private Button btnOpenCamera;
 }

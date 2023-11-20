@@ -2,6 +2,35 @@
   "version": 3,
   "targets": {
     "net7.0-windows7.0": {
+      "FlashCap/1.8.0": {
+        "type": "package",
+        "dependencies": {
+          "FlashCap.Core": "1.8.0"
+        },
+        "compile": {
+          "lib/net7.0/FlashCap.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/FlashCap.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "FlashCap.Core/1.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/FlashCap.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/FlashCap.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -348,6 +377,28 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Win32.SystemEvents/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "type": "package",
         "dependencies": {
@@ -514,6 +565,41 @@
           "lib/netstandard2.0/System.CodeDom.dll": {}
         }
       },
+      "System.Device.Gpio/3.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net5.0/System.Device.Gpio.targets": {}
+        }
+      },
+      "System.Drawing.Common/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "8.0.0"
+        },
+        "compile": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
       "System.Memory/4.5.3": {
         "type": "package",
         "compile": {
@@ -567,6 +653,98 @@
     }
   },
   "libraries": {
+    "FlashCap/1.8.0": {
+      "sha512": "s+ZE1TDxf9k8yt6+YM8DPQBSXjOEPgGLwXxCmIV7qL6hFZ1bS3UAcJBGB5XVm7PoAQXVflXQTsjlxft77Hxu0w==",
+      "type": "package",
+      "path": "flashcap/1.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FlashCap.100.png",
+        "flashcap.1.8.0.nupkg.sha512",
+        "flashcap.nuspec",
+        "lib/net35/FlashCap.dll",
+        "lib/net35/FlashCap.xml",
+        "lib/net40/FlashCap.dll",
+        "lib/net40/FlashCap.xml",
+        "lib/net45/FlashCap.dll",
+        "lib/net45/FlashCap.xml",
+        "lib/net461/FlashCap.dll",
+        "lib/net461/FlashCap.xml",
+        "lib/net48/FlashCap.dll",
+        "lib/net48/FlashCap.xml",
+        "lib/net5.0/FlashCap.dll",
+        "lib/net5.0/FlashCap.xml",
+        "lib/net6.0/FlashCap.dll",
+        "lib/net6.0/FlashCap.xml",
+        "lib/net7.0/FlashCap.dll",
+        "lib/net7.0/FlashCap.xml",
+        "lib/net8.0/FlashCap.dll",
+        "lib/net8.0/FlashCap.xml",
+        "lib/netcoreapp2.0/FlashCap.dll",
+        "lib/netcoreapp2.0/FlashCap.xml",
+        "lib/netcoreapp2.1/FlashCap.dll",
+        "lib/netcoreapp2.1/FlashCap.xml",
+        "lib/netcoreapp2.2/FlashCap.dll",
+        "lib/netcoreapp2.2/FlashCap.xml",
+        "lib/netcoreapp3.0/FlashCap.dll",
+        "lib/netcoreapp3.0/FlashCap.xml",
+        "lib/netcoreapp3.1/FlashCap.dll",
+        "lib/netcoreapp3.1/FlashCap.xml",
+        "lib/netstandard1.3/FlashCap.dll",
+        "lib/netstandard1.3/FlashCap.xml",
+        "lib/netstandard2.0/FlashCap.dll",
+        "lib/netstandard2.0/FlashCap.xml",
+        "lib/netstandard2.1/FlashCap.dll",
+        "lib/netstandard2.1/FlashCap.xml"
+      ]
+    },
+    "FlashCap.Core/1.8.0": {
+      "sha512": "g6A8DafV9cL9iEClJl2qTIyOwbFf9eTf0LE5O+wLG5AjxMIUz3w9a1bkcuV8dA0OgG+bN6aTwar2IY3p4xaF1w==",
+      "type": "package",
+      "path": "flashcap.core/1.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FlashCap.100.png",
+        "flashcap.core.1.8.0.nupkg.sha512",
+        "flashcap.core.nuspec",
+        "lib/net35/FlashCap.Core.dll",
+        "lib/net35/FlashCap.Core.xml",
+        "lib/net40/FlashCap.Core.dll",
+        "lib/net40/FlashCap.Core.xml",
+        "lib/net45/FlashCap.Core.dll",
+        "lib/net45/FlashCap.Core.xml",
+        "lib/net461/FlashCap.Core.dll",
+        "lib/net461/FlashCap.Core.xml",
+        "lib/net48/FlashCap.Core.dll",
+        "lib/net48/FlashCap.Core.xml",
+        "lib/net5.0/FlashCap.Core.dll",
+        "lib/net5.0/FlashCap.Core.xml",
+        "lib/net6.0/FlashCap.Core.dll",
+        "lib/net6.0/FlashCap.Core.xml",
+        "lib/net7.0/FlashCap.Core.dll",
+        "lib/net7.0/FlashCap.Core.xml",
+        "lib/net8.0/FlashCap.Core.dll",
+        "lib/net8.0/FlashCap.Core.xml",
+        "lib/netcoreapp2.0/FlashCap.Core.dll",
+        "lib/netcoreapp2.0/FlashCap.Core.xml",
+        "lib/netcoreapp2.1/FlashCap.Core.dll",
+        "lib/netcoreapp2.1/FlashCap.Core.xml",
+        "lib/netcoreapp2.2/FlashCap.Core.dll",
+        "lib/netcoreapp2.2/FlashCap.Core.xml",
+        "lib/netcoreapp3.0/FlashCap.Core.dll",
+        "lib/netcoreapp3.0/FlashCap.Core.xml",
+        "lib/netcoreapp3.1/FlashCap.Core.dll",
+        "lib/netcoreapp3.1/FlashCap.Core.xml",
+        "lib/netstandard1.3/FlashCap.Core.dll",
+        "lib/netstandard1.3/FlashCap.Core.xml",
+        "lib/netstandard2.0/FlashCap.Core.dll",
+        "lib/netstandard2.0/FlashCap.Core.xml",
+        "lib/netstandard2.1/FlashCap.Core.dll",
+        "lib/netstandard2.1/FlashCap.Core.xml"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -1047,6 +1225,41 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Win32.SystemEvents/8.0.0": {
+      "sha512": "9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
+        "lib/net462/Microsoft.Win32.SystemEvents.dll",
+        "lib/net462/Microsoft.Win32.SystemEvents.xml",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "Mono.TextTemplating/2.2.1": {
       "sha512": "KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "type": "package",
@@ -1169,6 +1382,66 @@
         "system.codedom.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "System.Device.Gpio/3.1.0": {
+      "sha512": "4Jw7+lTwdU63zsaD9a6H47YC/LK6lGhi3SKBGdf1jV0ySj22NJkglQ35dBZWbtwiXOzbBn3Gl8XzIcpv1pai3Q==",
+      "type": "package",
+      "path": "system.device.gpio/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net5.0/System.Device.Gpio.targets",
+        "lib/net6.0-windows10.0.17763/System.Device.Gpio.dll",
+        "lib/net6.0-windows10.0.17763/System.Device.Gpio.xml",
+        "lib/net6.0/System.Device.Gpio.dll",
+        "lib/net6.0/System.Device.Gpio.xml",
+        "lib/netstandard2.0/System.Device.Gpio.dll",
+        "lib/netstandard2.0/System.Device.Gpio.xml",
+        "system.device.gpio.3.1.0.nupkg.sha512",
+        "system.device.gpio.nuspec"
+      ]
+    },
+    "System.Drawing.Common/8.0.0": {
+      "sha512": "JkbHJjtI/dWc5dfmEdJlbe3VwgZqCkZRtfuWFh5GOv0f+gGCfBtzMpIVkmdkj2AObO9y+oiOi81UGwH3aBYuqA==",
+      "type": "package",
+      "path": "system.drawing.common/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Drawing.Common.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.Drawing.Common.dll",
+        "lib/net462/System.Drawing.Common.pdb",
+        "lib/net462/System.Drawing.Common.xml",
+        "lib/net6.0/System.Drawing.Common.dll",
+        "lib/net6.0/System.Drawing.Common.pdb",
+        "lib/net6.0/System.Drawing.Common.xml",
+        "lib/net7.0/System.Drawing.Common.dll",
+        "lib/net7.0/System.Drawing.Common.pdb",
+        "lib/net7.0/System.Drawing.Common.xml",
+        "lib/net8.0/System.Drawing.Common.dll",
+        "lib/net8.0/System.Drawing.Common.pdb",
+        "lib/net8.0/System.Drawing.Common.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.pdb",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "system.drawing.common.8.0.0.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Memory/4.5.3": {
@@ -1297,8 +1570,11 @@
   },
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
+      "FlashCap >= 1.8.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.12",
-      "Microsoft.EntityFrameworkCore.Tools >= 7.0.12"
+      "Microsoft.EntityFrameworkCore.Tools >= 7.0.12",
+      "System.Device.Gpio >= 3.1.0",
+      "System.Drawing.Common >= 8.0.0"
     ]
   },
   "packageFolders": {
@@ -1345,6 +1621,10 @@
       "net7.0-windows7.0": {
         "targetAlias": "net7.0-windows",
         "dependencies": {
+          "FlashCap": {
+            "target": "Package",
+            "version": "[1.8.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
             "version": "[7.0.12, )"
@@ -1354,6 +1634,14 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.12, )"
+          },
+          "System.Device.Gpio": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "System.Drawing.Common": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           }
         },
         "imports": [

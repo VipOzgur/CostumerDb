@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.Linq;
 using MusteriData.Models;
+using MusteriData;
 
 namespace yeni;
 
@@ -184,7 +185,6 @@ public partial class Form1 : Form
             // PictureBox oluþtur
             PictureBox pictureBox = new PictureBox
             {
-                //Image = new System.Drawing.Bitmap(resimDosya),
                 ImageLocation = (tag[0] != 0) ? imagesFilePath + resimDosya : resimDosya,
                 SizeMode = PictureBoxSizeMode.Zoom, // Ýsteðe baðlý olarak resim boyutunu ayarla
                 Width = 150, // Ýsteðe baðlý olarak geniþlik ayarla
@@ -379,5 +379,58 @@ public partial class Form1 : Form
             }
         }
         #endregion
+    }
+
+    private void btnOpenCamera_Click(object sender, EventArgs e)
+    {
+        CameraForm form = new CameraForm();
+        form.FormClosed += CameraForm_FormClosed;
+        form.Show();
+    }
+
+    private void CameraForm_FormClosed(object? sender, FormClosedEventArgs e)
+    {
+        if (PublicClass.Durum)
+        {
+            //ListeleResimler([$"{PublicClass.SharedImg}"], [0], 1);
+            PictureBox pictureBox = new PictureBox
+            {
+                Image = PublicClass.SharedImg,
+                SizeMode = PictureBoxSizeMode.Zoom, // Ýsteðe baðlý olarak resim boyutunu ayarla
+                Width = 150, // Ýsteðe baðlý olarak geniþlik ayarla
+                Height = 150, // Ýsteðe baðlý olarak yükseklik ayarla
+                Tag = null
+            };
+            // PictureBox'a týklandýðýnda yapýlacak iþlemi tanýmla 
+            pictureBox.MouseDown += (sender, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    PictureBox clickedPictureBox = (PictureBox)sender; // Týklanan PictureBox'ý alýn
+
+                    Control.ControlCollection controls = (flowLayoutPanel1.Controls.Contains(clickedPictureBox)) ? flowLayoutPanel1.Controls : flowLayoutPanel2.Controls;
+                    int index = controls.IndexOf(clickedPictureBox);
+                    int lastindex = controls.Count - 1;
+                    Form2 form2 = new Form2(index, lastindex, controls);
+                    form2.Show();
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    flowLayoutPanel2.ContextMenuStrip = new ContextMenuStrip();
+                    ToolStripMenuItem silMenuItem = new ToolStripMenuItem("Sil");
+                    silMenuItem.Click += (senderMenuItem, eMenuItem) =>
+                    {
+                        flowLayoutPanel2.Controls.Remove(pictureBox); // PictureBox'ý FlowLayoutPanel'dan kaldýr
+                        if (pictureBox.Tag != null)
+                        {
+                            DeleteImages.Add(Convert.ToInt64(pictureBox.Tag));
+                        }
+                    };
+                    flowLayoutPanel2.ContextMenuStrip.Items.Add(silMenuItem);
+                }
+            };
+            // PictureBox'ý FlowLayoutPanel'a ekle
+            flowLayoutPanel2.Controls.Add(pictureBox);
+        }
     }
 }

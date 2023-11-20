@@ -196,3 +196,11 @@ C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\refint\
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.pdb
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.genruntimeconfig.cache
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\ref\MusteriData.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.CameraForm.resources
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\FlashCap.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\FlashCap.Core.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\Microsoft.Win32.SystemEvents.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\System.Device.Gpio.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\System.Drawing.Common.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.Form3.resources

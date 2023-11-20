@@ -44,6 +44,10 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "dependencies": {
+            "FlashCap": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.12, )"
@@ -53,6 +57,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.12, )"
+            },
+            "System.Device.Gpio": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
