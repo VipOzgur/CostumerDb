@@ -34,6 +34,8 @@
             btnResimCek = new Button();
             btnKaydet = new Button();
             panel1 = new Panel();
+            label2 = new Label();
+            comboBox1 = new ComboBox();
             panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -52,8 +54,9 @@
             // 
             // comboBoxKameralar
             // 
+            comboBoxKameralar.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxKameralar.FormattingEnabled = true;
-            comboBoxKameralar.Location = new Point(133, 44);
+            comboBoxKameralar.Location = new Point(133, 38);
             comboBoxKameralar.Margin = new Padding(4);
             comboBoxKameralar.Name = "comboBoxKameralar";
             comboBoxKameralar.Size = new Size(468, 36);
@@ -62,15 +65,15 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = SystemColors.Control;
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Location = new Point(163, 7);
             pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(934, 556);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.Size = new Size(1114, 596);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
+            pictureBox1.SizeChanged += pictureBox1_SizeChanged;
             // 
             // btnResimCek
             // 
@@ -95,6 +98,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(comboBoxKameralar);
             panel1.Controls.Add(btnKaydet);
             panel1.Controls.Add(label1);
@@ -102,8 +107,26 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(5, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(934, 151);
+            panel1.Size = new Size(1469, 151);
             panel1.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(53, 90);
+            label2.Name = "label2";
+            label2.Size = new Size(55, 28);
+            label2.TabIndex = 6;
+            label2.Text = "Oran";
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.Location = new Point(133, 87);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(263, 36);
+            comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // panel2
             // 
@@ -112,14 +135,14 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(5, 156);
             panel2.Name = "panel2";
-            panel2.Size = new Size(934, 556);
+            panel2.Size = new Size(1469, 607);
             panel2.TabIndex = 6;
             // 
             // CameraForm
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(944, 717);
+            ClientSize = new Size(1479, 768);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 12F);
@@ -129,6 +152,7 @@
             Padding = new Padding(5);
             Text = "Kamera";
             WindowState = FormWindowState.Maximized;
+            FormClosing += CameraForm_FormClosing;
             Load += CameraForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
@@ -146,5 +170,7 @@
         private Button btnKaydet;
         private Panel panel1;
         private Panel panel2;
+        private ComboBox comboBox1;
+        private Label label2;
     }
 }

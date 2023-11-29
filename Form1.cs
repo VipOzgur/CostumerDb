@@ -187,10 +187,6 @@ public partial class Form1 : Form
         }
     }
 
-
-
-
-
     private void ListeleResimler(string[] imagesPath, long[] tag, int? deger)
     {
         #region Resim Listeleme
@@ -272,8 +268,8 @@ public partial class Form1 : Form
     }
     private string ResimKaydet(Image img, string dosyaAdi)
     {
-        img.Save(imagesFilePath + dosyaAdi, ImageFormat.Jpeg);
-        return dosyaAdi;
+        img.Save(imagesFilePath + dosyaAdi+".jpeg", ImageFormat.Jpeg);
+        return dosyaAdi+".jpeg";
     }
 
     private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -405,13 +401,14 @@ public partial class Form1 : Form
     {
         CameraForm form = new CameraForm();
         form.FormClosed += CameraForm_FormClosed;
-        form.Show();
+        form.ShowDialog();
     }
 
     private void CameraForm_FormClosed(object? sender, FormClosedEventArgs e)
     {
         if (PublicClass.Durum)
         {
+            PublicClass.Durum = false;
             //ListeleResimler([$"{PublicClass.SharedImg}"], [0], 1);
             PictureBox pictureBox = new PictureBox
             {
@@ -451,6 +448,17 @@ public partial class Form1 : Form
             };
             // PictureBox'ý FlowLayoutPanel'a ekle
             flowLayoutPanel2.Controls.Add(pictureBox);
+            //PublicClass.SharedImg.Dispose();
+        }
+    }
+
+    private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        DialogResult result = MessageBox.Show("Uygulamayý kapatmak istediðinizden emin misiniz?", "Kapat", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        if (result == DialogResult.No)
+        {
+            e.Cancel = true; // Formun kapanmasýný iptal et
         }
     }
 }

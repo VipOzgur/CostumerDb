@@ -298,6 +298,7 @@ partial class Form1
         Controls.Add(tabControl1);
         Name = "Form1";
         WindowState = FormWindowState.Maximized;
+        FormClosing += Form1_FormClosing;
         Load += Form1_Load;
         tabControl1.ResumeLayout(false);
         tabPage1.ResumeLayout(false);
