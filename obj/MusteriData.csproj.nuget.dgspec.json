@@ -44,6 +44,10 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "dependencies": {
+            "EcoCore": {
+              "target": "Package",
+              "version": "[7.0.0.15228, )"
+            },
             "FlashCap": {
               "target": "Package",
               "version": "[1.8.0, )"

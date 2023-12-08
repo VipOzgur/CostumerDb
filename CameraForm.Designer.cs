@@ -34,6 +34,8 @@
             btnResimCek = new Button();
             btnKaydet = new Button();
             panel1 = new Panel();
+            button2 = new Button();
+            button1 = new Button();
             label2 = new Label();
             comboBox1 = new ComboBox();
             panel2 = new Panel();
@@ -98,6 +100,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(comboBoxKameralar);
@@ -109,6 +113,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1469, 151);
             panel1.TabIndex = 5;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(629, 98);
+            button2.Name = "button2";
+            button2.Size = new Size(156, 33);
+            button2.TabIndex = 8;
+            button2.Text = "DeviceDispose";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(452, 95);
+            button1.Name = "button1";
+            button1.Size = new Size(135, 36);
+            button1.TabIndex = 7;
+            button1.Text = "DeviceStop";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label2
             // 
@@ -172,5 +196,7 @@
         private Panel panel2;
         private ComboBox comboBox1;
         private Label label2;
+        private Button button1;
+        private Button button2;
     }
 }

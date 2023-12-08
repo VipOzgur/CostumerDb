@@ -268,8 +268,8 @@ public partial class Form1 : Form
     }
     private string ResimKaydet(Image img, string dosyaAdi)
     {
-        img.Save(imagesFilePath + dosyaAdi+".jpeg", ImageFormat.Jpeg);
-        return dosyaAdi+".jpeg";
+        img.Save(imagesFilePath + dosyaAdi + ".jpeg", ImageFormat.Jpeg);
+        return dosyaAdi + ".jpeg";
     }
 
     private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -460,5 +460,11 @@ public partial class Form1 : Form
         {
             e.Cancel = true; // Formun kapanmasýný iptal et
         }
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        Deneme deneme = new Deneme();
+        deneme.ShowDialog();
     }
 }

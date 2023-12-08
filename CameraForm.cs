@@ -1,4 +1,5 @@
 ﻿using FlashCap;
+using FlashCap.Devices;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ namespace MusteriData;
 
 public partial class CameraForm : Form
 {
+    //using var devic=null;
     CaptureDevices devices = new CaptureDevices();
     CaptureDevice device;
     int newWidth;
@@ -21,18 +23,20 @@ public partial class CameraForm : Form
                 comboBoxKameralar.Items.Add(descriptor.Name);
             }
         }
-        comboBoxKameralar.SelectedIndex = PublicClass.ComboBoxKameralarSelectedIndex;
         comboBox1.Items.Add("Orjinal");
         comboBox1.Items.Add("3:4");
         comboBox1.Items.Add("1:1");
         comboBox1.Items.Add("9:16");
-        this.AcceptButton = (btnResimCek.Text == "Çek") ? btnResimCek : btnKaydet;
+        this.AcceptButton = btnResimCek;
     }
 
 
     private void CameraForm_Load(object sender, EventArgs e)
     {
+        comboBoxKameralar.SelectedIndex = PublicClass.ComboBoxKameralarSelectedIndex;
         KayitOnAsync();
+        if (device != null)
+            device.StartAsync();
         //comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
     }
     private async Task KayitOnAsync()
@@ -49,24 +53,23 @@ public partial class CameraForm : Form
                     await device.DisposeAsync();
                 }
                 device = await descriptor0.OpenAsync(descriptor0.Characteristics[0],
-                async bufferScope =>
-                {
-                    // Captured into a pixel buffer from an argument.
-                    // Get image data (Maybe DIB/JPEG/PNG):
-                    byte[] image = bufferScope.Buffer.ExtractImage();
+               async bufferScope =>
+               {
+                   // Captured into a pixel buffer from an argument.
+                   // Get image data (Maybe DIB/JPEG/PNG):
+                   byte[] image = bufferScope.Buffer.ExtractImage();
 
-                    using (var mse = new MemoryStream(image))
-                    using (var bitmap = System.Drawing.Image.FromStream(mse) as Bitmap)
-                    {
-                        if (bitmap != null)
-                        {
-                            pictureBox1.Image?.Dispose(); // Önceki resmi serbest bırak
-                            pictureBox1.Image = (Bitmap)bitmap.Clone(); // Yeni bir kopyasını oluşturarak atan
-                        }
-                    }
-                });
+                   using (var mse = new MemoryStream(image))
+                   using (var bitmap = System.Drawing.Image.FromStream(mse) as Bitmap)
+                   {
+                       if (bitmap != null)
+                       {
+                           pictureBox1.Image?.Dispose(); // Önceki resmi serbest bırak
+                           pictureBox1.Image = (Bitmap)bitmap.Clone(); // Yeni bir kopyasını oluşturarak atan
+                       }
+                   }
+               });
             }
-            await device.StartAsync();
             comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
         }
         catch (Exception)
@@ -75,27 +78,28 @@ public partial class CameraForm : Form
         }
     }
 
-    private void comboBoxKameralar_SelectedIndexChanged(object sender, EventArgs e)
+    private async void comboBoxKameralar_SelectedIndexChanged(object sender, EventArgs e)
     {
 
         PublicClass.ComboBoxKameralarSelectedIndex = comboBoxKameralar.SelectedIndex;
-        KayitOnAsync();
+        await KayitOnAsync();
+        if (device != null)
+            await device.StartAsync();
     }
-    private void ResimCek(bool durum)
+    private async void ResimCek(bool durum)
     {
         if (pictureBox1.Image != null)
         {
             if (durum)
             {
-
-                device.StopAsync();
+                await device.StopAsync();
                 pictureBox1.BorderStyle = BorderStyle.Fixed3D;
                 btnResimCek.Text = "Yeniden Çek";
                 btnKaydet.Enabled = true;
             }
             else
             {
-                device.StartAsync();
+                await device.StartAsync();
                 btnResimCek.Text = "Çek";
                 pictureBox1.BorderStyle = BorderStyle.None;
                 btnKaydet.Enabled = false;
@@ -129,10 +133,24 @@ public partial class CameraForm : Form
         }
     }
 
-    private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
+    private async void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
     {
+        //MessageBox.Show(device.Name);
         if (device != null)
-            device.Dispose();
+        {
+            try
+            {
+            if (device != null)
+            {
+                await device.StopAsync();
+                await device.DisposeAsync();
+            }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Form Closing Stop and Dispose Ex"+ex);
+            }
+        }
     }
 
     private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,6 +231,34 @@ public partial class CameraForm : Form
             return newImage;
         }
 
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        try
+        {
+
+        device.StopAsync();
+        MessageBox.Show("Stop edildi");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Stop ex"+ ex.Message);
+        }
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+        try
+        {
+        device.DisposeAsync();
+        MessageBox.Show("Dispose edildi");
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Dispose ex"+ ex);
+        }
     }
 }
 

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WiANFiFXcTKDOU5JIYm5+BEXlYEVTnW0d582A8xoJcm6C+L53szN8iU3JoC1J5iMqhdvsJDgD6/iwL1iAIq02g==",
+  "dgSpecHash": "hBhrBddz2LIkxwPqG0wOut2/G3PDYq5Lb0nrzCdRVvXZ3ce7MfXHR4ise+QZZT2QUPjke0gDReIhluJqY2THYg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Özgür Özkan\\Desktop\\etc\\MusteriData\\MusteriData.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Özgür Özkan\\.nuget\\packages\\ecocore\\7.0.0.15228\\ecocore.7.0.0.15228.nupkg.sha512",
     "C:\\Users\\Özgür Özkan\\.nuget\\packages\\flashcap\\1.8.0\\flashcap.1.8.0.nupkg.sha512",
     "C:\\Users\\Özgür Özkan\\.nuget\\packages\\flashcap.core\\1.8.0\\flashcap.core.1.8.0.nupkg.sha512",
     "C:\\Users\\Özgür Özkan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -39,5 +40,16 @@
     "C:\\Users\\Özgür Özkan\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\Özgür Özkan\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EcoCore 7.0.0.15228' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EcoCore",
+      "targetGraphs": [
+        "net7.0-windows7.0"
+      ]
+    }
+  ]
 }
