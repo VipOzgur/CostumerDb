@@ -10,7 +10,8 @@ public partial class CameraForm : Form
 {
     //using var devic=null;
     CaptureDevices devices = new CaptureDevices();
-    CaptureDevice device;
+    bool isRuning = true;
+    int aweiter = 20;
     int newWidth;
     int newHeight;
     public CameraForm()
@@ -31,12 +32,14 @@ public partial class CameraForm : Form
     }
 
 
-    private void CameraForm_Load(object sender, EventArgs e)
+    private async void CameraForm_Load(object sender, EventArgs e)
     {
         comboBoxKameralar.SelectedIndex = PublicClass.ComboBoxKameralarSelectedIndex;
-        KayitOnAsync();
-        if (device != null)
-            device.StartAsync();
+        isRuning = false;
+        await KayitOnAsync();
+        //comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
+        //if (device != null)
+        // device.StartAsync();
         //comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
     }
     private async Task KayitOnAsync()
@@ -47,12 +50,8 @@ public partial class CameraForm : Form
             var descriptor0 = devices.EnumerateDescriptors().ElementAt(PublicClass.ComboBoxKameralarSelectedIndex);
             if (descriptor0.Characteristics.Length > 0)
             {
-                if (device != null)
-                {
-                    await device.StopAsync();
-                    await device.DisposeAsync();
-                }
-                device = await descriptor0.OpenAsync(descriptor0.Characteristics[0],
+                isRuning = true;
+                using (var device = await descriptor0.OpenAsync(descriptor0.Characteristics[0],
                async bufferScope =>
                {
                    // Captured into a pixel buffer from an argument.
@@ -68,9 +67,18 @@ public partial class CameraForm : Form
                            pictureBox1.Image = (Bitmap)bitmap.Clone(); // Yeni bir kopyasını oluşturarak atan
                        }
                    }
-               });
+               }))
+                {
+                    await device.StartAsync();
+                    await Task.Delay(1000);
+                    comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
+                    while (isRuning)
+                    {
+                        await Task.Delay(aweiter); // 1 saniye bekleyelim
+                    }
+                    await device.StopAsync();
+                }
             }
-            comboBox1.SelectedIndex = PublicClass.ComboBox1SelectedIndex;
         }
         catch (Exception)
         {
@@ -82,24 +90,30 @@ public partial class CameraForm : Form
     {
 
         PublicClass.ComboBoxKameralarSelectedIndex = comboBoxKameralar.SelectedIndex;
+        isRuning = false;
+        await Task.Delay(1000);
         await KayitOnAsync();
-        if (device != null)
-            await device.StartAsync();
+        //if (device != null)
+        //    await device.StartAsync();
     }
-    private async void ResimCek(bool durum)
+    private void ResimCek(bool durum)
     {
         if (pictureBox1.Image != null)
         {
             if (durum)
             {
-                await device.StopAsync();
+                //await device.StopAsync();
+                isRuning = false;
                 pictureBox1.BorderStyle = BorderStyle.Fixed3D;
                 btnResimCek.Text = "Yeniden Çek";
                 btnKaydet.Enabled = true;
             }
             else
             {
-                await device.StartAsync();
+                //await device.StartAsync();
+                isRuning = false;
+                Task.Delay(1000);
+                KayitOnAsync();
                 btnResimCek.Text = "Çek";
                 pictureBox1.BorderStyle = BorderStyle.None;
                 btnKaydet.Enabled = false;
@@ -125,6 +139,7 @@ public partial class CameraForm : Form
         {
             PublicClass.SharedImg = ResimGetir();    ////(Image)pictureBox1.Image.Clone();
             PublicClass.Durum = true;
+            isRuning = false;
             this.Close();
         }
         else
@@ -133,33 +148,34 @@ public partial class CameraForm : Form
         }
     }
 
-    private async void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
+    private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
     {
+        isRuning = false;
         //MessageBox.Show(device.Name);
-        if (device != null)
-        {
-            try
-            {
-            if (device != null)
-            {
-                await device.StopAsync();
-                await device.DisposeAsync();
-            }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Form Closing Stop and Dispose Ex"+ex);
-            }
-        }
+        //if (device != null)
+        //{
+        //    try
+        //    {
+        //    if (device != null)
+        //    {
+        //        await device.StopAsync();
+        //        await device.DisposeAsync();
+        //    }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Form Closing Stop and Dispose Ex"+ex);
+        //    }
+        //}
     }
 
     private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (device != null)
+        if (pictureBox1.Image != null)  //device
         {
             PublicClass.ComboBox1SelectedIndex = comboBox1.SelectedIndex;
-            newWidth = device.Characteristics.Width;
-            newHeight = device.Characteristics.Height;
+            newWidth = pictureBox1.Image.Width;  //device.Characteristics.Width;
+            newHeight = pictureBox1.Image.Height; //device.Characteristics.Height;
             // Yeni boyutları belirle (örneğin, 3/4 oranında)
             if (newHeight < newWidth)
             {
@@ -231,34 +247,6 @@ public partial class CameraForm : Form
             return newImage;
         }
 
-    }
-
-    private void button1_Click(object sender, EventArgs e)
-    {
-        try
-        {
-
-        device.StopAsync();
-        MessageBox.Show("Stop edildi");
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Stop ex"+ ex.Message);
-        }
-    }
-
-    private void button2_Click(object sender, EventArgs e)
-    {
-        try
-        {
-        device.DisposeAsync();
-        MessageBox.Show("Dispose edildi");
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Dispose ex"+ ex);
-        }
     }
 }
 

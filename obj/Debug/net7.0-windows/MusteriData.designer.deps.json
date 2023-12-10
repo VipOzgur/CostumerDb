@@ -6,26 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "EcoCore/7.0.0.15228": {
-        "runtime": {
-          "lib/net40/Eco.Handles.dll": {
-            "assemblyVersion": "7.1.0.0",
-            "fileVersion": "7.0.0.15228"
-          },
-          "lib/net40/Eco.Interfaces.dll": {
-            "assemblyVersion": "7.1.0.0",
-            "fileVersion": "7.0.0.15228"
-          },
-          "lib/net40/Eco.LinqExtender.dll": {
-            "assemblyVersion": "7.1.0.0",
-            "fileVersion": "7.0.0.15228"
-          },
-          "lib/net40/MDriven.Net.Http.dll": {
-            "assemblyVersion": "7.1.0.0",
-            "fileVersion": "7.0.0.15228"
-          }
-        }
-      },
       "FlashCap/1.8.0": {
         "dependencies": {
           "FlashCap.Core": "1.8.0"
@@ -486,13 +466,6 @@
     }
   },
   "libraries": {
-    "EcoCore/7.0.0.15228": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-18BLl5hjIchu1pfsRR1kQemIEoY4tvCSRNbFb7ZXvroerFc288xS0pLifxjk21j9RSqgFsX1+f1IjwKmBlLo6A==",
-      "path": "ecocore/7.0.0.15228",
-      "hashPath": "ecocore.7.0.0.15228.nupkg.sha512"
-    },
     "FlashCap/1.8.0": {
       "type": "package",
       "serviceable": true,

@@ -402,6 +402,7 @@ public partial class Form1 : Form
         CameraForm form = new CameraForm();
         form.FormClosed += CameraForm_FormClosed;
         form.ShowDialog();
+        form.Dispose();
     }
 
     private void CameraForm_FormClosed(object? sender, FormClosedEventArgs e)
@@ -460,11 +461,5 @@ public partial class Form1 : Form
         {
             e.Cancel = true; // Formun kapanmasýný iptal et
         }
-    }
-
-    private void button1_Click(object sender, EventArgs e)
-    {
-        Deneme deneme = new Deneme();
-        deneme.ShowDialog();
     }
 }

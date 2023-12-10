@@ -33,7 +33,6 @@ partial class Form1
         tabPage1 = new TabPage();
         panel3 = new Panel();
         panel4 = new Panel();
-        button1 = new Button();
         label2 = new Label();
         btnKayitSil = new Button();
         btnGoUpdate = new Button();
@@ -98,19 +97,11 @@ partial class Form1
         // 
         resources.ApplyResources(panel4, "panel4");
         panel4.BackColor = Color.WhiteSmoke;
-        panel4.Controls.Add(button1);
         panel4.Controls.Add(label2);
         panel4.Controls.Add(btnKayitSil);
         panel4.Controls.Add(btnGoUpdate);
         panel4.Controls.Add(lblAd);
         panel4.Name = "panel4";
-        // 
-        // button1
-        // 
-        resources.ApplyResources(button1, "button1");
-        button1.Name = "button1";
-        button1.UseVisualStyleBackColor = true;
-        button1.Click += button1_Click;
         // 
         // label2
         // 
@@ -350,10 +341,9 @@ partial class Form1
     private Panel panel5;
     private Panel panel6;
     private Panel panel7;
-    private Label label2;
     private DataGridViewTextBoxColumn nameColumn;
     private DataGridViewTextBoxColumn uploadDate;
     private DataGridViewTextBoxColumn Id;
     private Button btnOpenCamera;
-    private Button button1;
+    private Label label2;
 }

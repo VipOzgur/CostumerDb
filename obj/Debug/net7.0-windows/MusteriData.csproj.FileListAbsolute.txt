@@ -204,8 +204,3 @@ C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\System.
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\System.Drawing.Common.dll
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.Properties.Resources.resources
-C:\Users\Özgür Özkan\Desktop\etc\MusteriData\obj\Debug\net7.0-windows\MusteriData.Deneme.resources
-C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\Eco.Handles.dll
-C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\Eco.Interfaces.dll
-C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\Eco.LinqExtender.dll
-C:\Users\Özgür Özkan\Desktop\etc\MusteriData\bin\Debug\net7.0-windows\MDriven.Net.Http.dll
